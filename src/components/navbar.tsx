@@ -19,6 +19,10 @@ export const Navbar: FC = () => {
     console.log(isMobileMenuOpen)
   };
 
+  const chooseCurrent = (name: string) => {
+    setCurrent(name)
+  }
+
   return (
     <nav className="bg-gray-800 fixed top-0 w-full">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -77,7 +81,10 @@ export const Navbar: FC = () => {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className= {current == item.name ?
+                    "text-gray-700 bg-gray-300 hover:bg-white  px-3 py-2 rounded-md text-sm font-medium"  :
+                    "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"}
+                    onClick={() => chooseCurrent(item.name)}
                   >
                     {item.name}
                   </Link>

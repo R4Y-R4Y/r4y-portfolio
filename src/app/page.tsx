@@ -1,14 +1,15 @@
-
+"use client"
+import IntroScene from "@/components/scenes/intro_scene";
 
 export default function Home() {
   return (
     <main className="">
       <section>
-        <div className="bg-black">
+        <div className="text-blue-700">
           Hello my name is Rayen Nasraoui
         </div>
-        <div className="bg-red-500">
-          Element
+        <div className="">
+          <IntroScene/>
         </div>
       </section>
       
