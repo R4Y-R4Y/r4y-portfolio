@@ -1,14 +1,15 @@
+import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import Bubble from "../models/bubble";
 
-export default function IntroScene(){
-  return(
+export default function HomeScene() {
+  return (
     <Canvas>
+      <OrbitControls />
       <ambientLight />
-      <pointLight position={[10, 10, 10]} />
-      <mesh>
-        <boxGeometry args={[1, 1, 1]} />
-        <meshStandardMaterial color="hotpink" />
-      </mesh>
+      <pointLight intensity={10} position={[2, 2, 2]} />
+      <Bubble/>
+      
     </Canvas>
-  )
+  );
 }

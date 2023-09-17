@@ -10,7 +10,7 @@
 
 @layer base{
   section{
-    @apply flex flex-col lg:flex-row items-center justify-evenly w-full h-screen;
+    @apply flex flex-col lg:flex-row items-center justify-evenly w-full h-screen md:mt-auto mt-32;
   }
 }
 
