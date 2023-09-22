@@ -2,8 +2,7 @@
 import Carousel from "@/components/carousel";
 import HomeScene from "@/components/scenes/intro_scene";
 import 'keen-slider/keen-slider.min.css'
-import { useKeenSlider } from "keen-slider/react"
-import { useState } from "react";
+
 
 export default function Home() {
   return (
