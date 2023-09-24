@@ -1,9 +1,9 @@
-import { useFrame } from "@react-three/fiber";
+import { MeshProps, useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 import CustomShaderMaterialType from 'three-custom-shader-material/vanilla'
 import ThreeCustomShaderMaterial from "three-custom-shader-material";
-export default function Bubble() {
+export default function Bubble(props: MeshProps) {
   const material = new THREE.MeshToonMaterial({
     color: "#42fff6",
     transparent: true,
@@ -19,7 +19,7 @@ export default function Bubble() {
   })
 
   return (
-    <mesh>
+    <mesh {...props}>
       <icosahedronGeometry args={[2,5]} />
 
       <ThreeCustomShaderMaterial
