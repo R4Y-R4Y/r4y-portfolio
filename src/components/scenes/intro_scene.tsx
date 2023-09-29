@@ -1,3 +1,4 @@
+"use-client"
 import { GizmoHelper, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import Bubble from "../models/bubble";
@@ -18,7 +19,7 @@ export default function HomeScene() {
         <GizmoHelper />
         <gridHelper args={[10, 10]} />
         <pointLight intensity={10} position={[2, 2, 2]} />
-        {/* <Bubble/> */}
+        <Bubble/>
         <SVG3DModel pathFile={`icons/${path}.svg`} />
       </Canvas>
       {/* <form onSubmit={(event) => {
