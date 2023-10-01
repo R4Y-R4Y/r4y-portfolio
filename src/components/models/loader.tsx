@@ -1,8 +1,9 @@
 import { SVGLoader, SVGResult } from "three/addons/loaders/SVGLoader.js";
-import { GroupProps, MeshProps, useLoader } from "@react-three/fiber";
-import { useEffect, useRef, useState } from "react";
-export function SVG3DModel(props: { pathFile: string } & GroupProps) {
-  const {pathFile} = props
+import { GroupProps, useLoader } from "@react-three/fiber";
+import { forwardRef, useEffect, useState } from "react";
+
+export const SVG3DModel = forwardRef<THREE.Group,{ pathFile: string } & GroupProps>((props , ref) => {
+  const {pathFile, ...groupProps} = props
   const svg: SVGResult = useLoader(SVGLoader, pathFile);
   const [shapes, setShapes] = useState(
     svg.paths.map((path, i) => {
@@ -19,14 +20,16 @@ export function SVG3DModel(props: { pathFile: string } & GroupProps) {
   ,[pathFile])
 
 
+
   return (
-    <group {...props} >
+    <group ref={ref} {...groupProps} >
       {shapes.map((shape, i) => (
         <mesh scale={[.1,-.1,.1]} rotation={[2 * Math.PI ,0,0]} position={[-1.5, -1.5, 0]}>
           <extrudeGeometry args={[shape.shape, { depth: .25 * i, bevelEnabled: true, bevelThickness: i==0 ? .2 : .1 }]} />
-          <meshStandardMaterial color={shape.color} />
+          <meshBasicMaterial color={shape.color} />
         </mesh>
       ))}
     </group>
   );
-}
+})
+

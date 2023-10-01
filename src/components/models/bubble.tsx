@@ -5,13 +5,18 @@ import CustomShaderMaterialType from 'three-custom-shader-material/vanilla'
 import ThreeCustomShaderMaterial from "three-custom-shader-material";
 import { noise } from "@/ts/shaders";
 
-export default function Bubble(props: MeshProps & THREE.MeshToonMaterialParameters) {
+type MyProps = MeshProps & {
+  materialProps: THREE.MeshToonMaterialParameters;
+};
+
+export default function Bubble(props: MyProps) {
+  const { materialProps, ...meshProps} = props
   const material = new THREE.MeshToonMaterial({
     color: "#42fff6",
     transparent: true,
-    opacity: .8,
+    opacity: .6,
     side: THREE.BackSide,
-    ...props
+    ...materialProps
   });
 
   const ref = useRef<CustomShaderMaterialType>()
@@ -22,7 +27,7 @@ export default function Bubble(props: MeshProps & THREE.MeshToonMaterialParamete
   })
 
   return (
-    <mesh {...props}>
+    <mesh {...meshProps}>
       <icosahedronGeometry args={[3,5]} />
       <ThreeCustomShaderMaterial
         ref={ref}

@@ -24,8 +24,8 @@ export default () => {
       onSwiper={(swiper) => console.log(swiper)}
     >
       {
-        skills.map((skill) => 
-          <SwiperSlide>
+        skills.map((skill,i) => 
+          <SwiperSlide key={i}>
             <div className='h-96 flex justify-center'>
               <div className='w-72 h-60 cursor-pointer border-b-4 rounded-md bg-gradient-to-t from-white/20 text-center px-3 py-7 self-end'>
                 <div className='text-5xl mt-2 max-w-[5rem] mx-auto min-w-[5rem] min-h-[5rem] rounded-full grid place-items-center'>
