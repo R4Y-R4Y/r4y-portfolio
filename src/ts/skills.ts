@@ -7,22 +7,17 @@ export type Skill = {
 }
 
 export function fibonacciSphere(samples: number = 1000, radius: number = 1): THREE.Vector3[] {
-  const points: THREE.Vector3[] = [];
   const phi = Math.PI * (Math.sqrt(5) - 1); // golden angle in radians
 
-  for (let i = 0; i < samples; i++) {
+  return Array.from({ length: samples }, (_, i) => {
     const y = 1 - (i / (samples - 1)) * 2; // y goes from 1 to -1
     const adjustedRadius = radius * Math.sqrt(1 - y * y); // Adjust radius based on y
-
     const theta = phi * i; // golden angle increment
-
     const x = Math.cos(theta) * adjustedRadius;
     const z = Math.sin(theta) * adjustedRadius;
 
-    points.push(new THREE.Vector3(x, y * radius, z)); // Multiply y by radius to maintain sphere size
-  }
-
-  return points;
+    return new THREE.Vector3(x, y * radius, z); // Multiply y by radius to maintain sphere size
+  });
 }
 
 export type Job = {

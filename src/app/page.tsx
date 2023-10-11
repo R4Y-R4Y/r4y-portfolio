@@ -45,18 +45,7 @@ function WorkSection() {
 function SkillsSection() {
   return(
     <section>
-      <div className="flex-1 h-screen">
-        <SkillBubbleScene />
-      </div>
-      <div className="flex-1 text-center">
-        <h2 className="text-red-600 font-bold">Hello!</h2>
-        <h3 className="font-bold">My name is {" "} 
-         <span className="text-green-700">Rayen Nasraoui</span> 
-        </h3>
-        <h3 className="font-bold">I am a {" "} 
-         <span className="text-yellow-300">React Wizard</span> 
-        </h3>
-      </div>
+      <SkillBubbleScene />
     </section>
   )
 }

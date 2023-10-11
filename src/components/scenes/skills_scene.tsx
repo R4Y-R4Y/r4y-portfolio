@@ -3,23 +3,38 @@ import { GizmoHelper } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import Bubble from "../models/bubble";
 import { SVG3DModel } from "../models/loader";
-import { Suspense, useMemo, useRef } from "react";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 import * as THREE from "three"
-import { fibonacciSphere, skills } from "@/ts/skills";
+import { Skill, fibonacciSphere, skills } from "@/ts/skills";
 import { useControls } from "leva";
 
 
+
 export default function SkillBubbleScene() {
+
+  const [skill, setSkill] = useState<Skill | undefined>()
+
   return (
-    <Canvas camera={{ position:[15,7,25] }} > 
-      <Scene />
-    </Canvas>
+  <>
+    <div className="flex-1 h-screen">
+      <Canvas camera={{ position:[15,7,25] }} > 
+        <Scene skill={skill} setSkill={setSkill} />
+      </Canvas>
+    </div>
+    <div className="flex-1 text-center">
+      <h2 className="text-red-600 font-bold">Skill: {skill?.name} </h2>
+      <h3 className="font-bold">Description: {skill?.description} </h3>
+      
+    </div>
+  </>
   );
 }
 
-function Scene() {
-  const {radius} = useControls({radius: 12})
-  const sphereArray = useMemo(() => fibonacciSphere(skills.length, radius), [radius]) 
+function Scene(props: {skill: Skill | undefined, setSkill: Dispatch<SetStateAction<Skill | undefined>>}){
+  const {skill, setSkill} = props
+  const {radius} = useControls({radius: 13})
+  const sphereArray = fibonacciSphere(skills.length, radius)
+  
   // const {
     //   x,
     //   y,
@@ -49,26 +64,27 @@ function Scene() {
     <GizmoHelper />
     <directionalLight intensity={10} position={[17, 12, 13]} />
     <group ref={bubbleRef} >
-    {
-      sphereArray.map((position, i) =>
-        <Skill pathFile={skills[i].icon} position={position}/>
-      )
-    }
+    { sphereArray.map((position, i) =>
+        <Skill onClick={() => setSkill(skills[i])} pathFile={skills[i].icon} position={position}/>
+    )}
     </group>
   </>)
 }
 
-function Skill(props:{pathFile: string, position: THREE.Vector3}) {
-  const {pathFile, position} = props
+function Skill(props:{pathFile: string, position: THREE.Vector3, onClick: Function}) {
+  const {pathFile, position, onClick} = props
   const ref = useRef<THREE.Group>(null!)
   useFrame(() => {
     ref.current.lookAt(new THREE.Vector3(15,7,25))
   })
 
   return(
-    <group >
-      <Bubble materialProps={{color: "#fff"}} position={position}  />
-      <SVG3DModel ref={ref} position={position} pathFile={pathFile}/>
-    </group>
+    <>
+      <Bubble onClick={e => {
+        e.stopPropagation()
+        onClick()
+      }} materialProps={{color: "#30afeb"}} position={position}  />
+      <SVG3DModel  ref={ref} position={position} pathFile={pathFile}/>
+    </>
   )
 }

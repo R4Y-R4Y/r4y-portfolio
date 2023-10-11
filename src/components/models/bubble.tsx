@@ -1,5 +1,5 @@
 import { MeshProps, useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import * as THREE from "three";
 import CustomShaderMaterialType from 'three-custom-shader-material/vanilla'
 import ThreeCustomShaderMaterial from "three-custom-shader-material";
@@ -11,13 +11,14 @@ type MyProps = MeshProps & {
 
 export default function Bubble(props: MyProps) {
   const { materialProps, ...meshProps} = props
-  const material = new THREE.MeshToonMaterial({
+  
+  const material = useMemo(() => new THREE.MeshToonMaterial({
     color: "#42fff6",
-    transparent: true,
+    transparent: false,
     opacity: .6,
     side: THREE.BackSide,
     ...materialProps
-  });
+  }), [materialProps]);
 
   const ref = useRef<CustomShaderMaterialType>()
 
@@ -27,7 +28,16 @@ export default function Bubble(props: MyProps) {
   })
 
   return (
-    <mesh {...meshProps}>
+    <mesh 
+      onPointerOver={e => {
+        e.stopPropagation()
+        material.color.set("#f00")
+      }} 
+      onPointerOut={e => {
+        e.stopPropagation()
+        material.color.set(materialProps?.color ?? "#42fff6")
+      }} 
+    {...meshProps}>
       <icosahedronGeometry args={[3,5]} />
       <ThreeCustomShaderMaterial
         ref={ref}
@@ -36,7 +46,8 @@ export default function Bubble(props: MyProps) {
           uTime: { value: 0 },
           random: {value: Math.random()*100 }
         }}
-        vertexShader={noise + /* glsl */`
+        vertexShader={
+          noise + `
           uniform float random;
 
           void main() {
@@ -57,3 +68,4 @@ export default function Bubble(props: MyProps) {
     </mesh>
   );
 }
+

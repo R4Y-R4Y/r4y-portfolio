@@ -21,7 +21,6 @@ export default () => {
         },
       }}
       onSlideChange={() => console.log('slide change')}
-      onSwiper={(swiper) => console.log(swiper)}
     >
       {
         skills.map((skill,i) => 

@@ -16,7 +16,6 @@ export const Navbar: FC = () => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
-    console.log(isMobileMenuOpen)
   };
 
   const chooseCurrent = (name: string) => {
