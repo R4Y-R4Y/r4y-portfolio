@@ -6,7 +6,7 @@ export type Skill = {
     icon: string;
 }
 
-export function fibonacciSphere(samples: number = 1000, radius: number = 1): THREE.Vector3[] {
+export function fibonacciSphere(samples: number = 1000, radius: number = 1): [x: number, y: number, z: number][] {
   const phi = Math.PI * (Math.sqrt(5) - 1); // golden angle in radians
 
   return Array.from({ length: samples }, (_, i) => {
@@ -16,7 +16,7 @@ export function fibonacciSphere(samples: number = 1000, radius: number = 1): THR
     const x = Math.cos(theta) * adjustedRadius;
     const z = Math.sin(theta) * adjustedRadius;
 
-    return new THREE.Vector3(x, y * radius, z); // Multiply y by radius to maintain sphere size
+    return [x, y * radius, z] // Multiply y by radius to maintain sphere size
   });
 }
 

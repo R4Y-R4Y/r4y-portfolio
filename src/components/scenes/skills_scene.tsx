@@ -1,6 +1,6 @@
 "use-client"
-import { GizmoHelper } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { PerspectiveCamera } from "@react-three/drei";
+import { Canvas, Vector3, useFrame } from "@react-three/fiber";
 import Bubble from "../models/bubble";
 import { SVG3DModel } from "../models/loader";
 import { Dispatch, SetStateAction, useRef, useState } from "react";
@@ -54,28 +54,28 @@ function Scene(props: {skill: Skill | undefined, setSkill: Dispatch<SetStateActi
       // })
   const bubbleRef = useRef<THREE.Group>(null!)
   useFrame((state) => {
-    state.camera.lookAt(new THREE.Vector3(0,0,0))
+    state.camera.lookAt(0,0,0)
     bubbleRef.current.rotation.y = state.clock.getElapsedTime()/5
     bubbleRef.current.rotation.x = state.clock.getElapsedTime()/10
     bubbleRef.current.rotation.z = state.clock.getElapsedTime()/15
   })
   return(
   <>
-    <GizmoHelper />
+    <PerspectiveCamera position={[15,7,25]}/>
     <directionalLight intensity={10} position={[17, 12, 13]} />
     <group ref={bubbleRef} >
     { sphereArray.map((position, i) =>
-        <Skill onClick={() => setSkill(skills[i])} pathFile={skills[i].icon} position={position}/>
+        <Skill onClick={() => setSkill(skills[i])} index={i} position={position}/>
     )}
     </group>
   </>)
 }
 
-function Skill(props:{pathFile: string, position: THREE.Vector3, onClick: Function}) {
-  const {pathFile, position, onClick} = props
+function Skill(props:{index: number, position: Vector3, onClick: Function}) {
+  const {index, position, onClick} = props
   const ref = useRef<THREE.Group>(null!)
   useFrame(() => {
-    ref.current.lookAt(new THREE.Vector3(15,7,25))
+    ref.current.lookAt(15,7,25)
   })
 
   return(
@@ -84,7 +84,7 @@ function Skill(props:{pathFile: string, position: THREE.Vector3, onClick: Functi
         e.stopPropagation()
         onClick()
       }} materialProps={{color: "#30afeb"}} position={position}  />
-      <SVG3DModel  ref={ref} position={position} pathFile={pathFile}/>
+      <SVG3DModel ref={ref} position={position} index={index}/>
     </>
   )
 }

@@ -7,12 +7,8 @@ import { useState } from "react";
 
 export default function HomeScene() {
 
-  const [model, setModel] = useState("")
-  const [path, setPath] = useState("react")
-
   return (
     <>
-      
       <Canvas >
         <OrbitControls />
         <ambientLight />
@@ -20,17 +16,8 @@ export default function HomeScene() {
         <gridHelper args={[10, 10]} />
         <pointLight intensity={10} position={[2, 2, 2]} />
         <Bubble/>
-        <SVG3DModel pathFile={`icons/${path}.svg`} />
+        <SVG3DModel index={0} />
       </Canvas>
-      {/* <form onSubmit={(event) => {
-        event.preventDefault()
-        setPath(model)
-      }}>
-        <input className="bg-black" onChange={(event) => setModel(event.target.value)} />
-        <button type="submit">
-          submit model
-        </button>
-      </form> */}
     </>
   );
 }
