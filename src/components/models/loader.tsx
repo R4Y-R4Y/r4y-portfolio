@@ -14,7 +14,7 @@ export const SVG3DModel = forwardRef<THREE.Group,{ index: number } & GroupProps>
   ,[index]);
 
   const meshes = useMemo(() => shapes.map((shape, i) => new THREE.Mesh(
-    new THREE.ExtrudeGeometry(shape.shape, { depth: .25 * i, bevelEnabled: true, bevelThickness: i==0 ? .2 : .1 }),
+    new THREE.ExtrudeGeometry(shape.shape, { depth: i, bevelEnabled: true, bevelThickness: i==0 ? .2 : .1 }),
     new THREE.MeshBasicMaterial({color: shape.color})
   )),[index])
 

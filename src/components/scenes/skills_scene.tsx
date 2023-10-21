@@ -32,7 +32,8 @@ export default function SkillBubbleScene() {
 
 function Scene(props: {skill: Skill | undefined, setSkill: Dispatch<SetStateAction<Skill | undefined>>}){
   const {skill, setSkill} = props
-  const {radius} = useControls({radius: 13})
+  // const {radius} = useControls({radius: 13})
+  const radius = 13
   const sphereArray = fibonacciSphere(skills.length, radius)
   
   // const {
