@@ -1,12 +1,12 @@
 import { MeshProps } from "@react-three/fiber";
-import { useMemo } from "react";
+import { forwardRef, useMemo } from "react";
 import * as THREE from "three";
 
 type MyProps = MeshProps & {
   materialProps?: THREE.MeshToonMaterialParameters;
 };
 
-export default function Bubble(props: MyProps) {
+const Bubble = forwardRef<THREE.Mesh, MyProps>((props,ref)=> {
   const { materialProps, ...meshProps} = props
   
   const materialToon = useMemo(() => new THREE.MeshToonMaterial({
@@ -29,9 +29,12 @@ export default function Bubble(props: MyProps) {
         materialToon.color.set(materialProps?.color ?? "#42fff6")
       }}
       material={materialToon} 
+      ref={ref}
     {...meshProps}>
       <icosahedronGeometry args={[3,5]} />
     </mesh>
   );
-}
+})
+
+export default Bubble
 

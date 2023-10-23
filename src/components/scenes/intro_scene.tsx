@@ -1,8 +1,10 @@
 "use-client"
 import { GizmoHelper, OrbitControls } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import { Character } from "../character";
-import { Suspense } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Suspense, useEffect, useRef, useState } from "react";
+import Bubble from "../models/bubble";
+import { MathUtils } from "three";
+import Character from "../character";
 
 export default function HomeScene() {
   return (
@@ -22,7 +24,7 @@ function Scene() {
       <gridHelper args={[10, 10]} />
       <pointLight intensity={10} position={[2, 2, 2]} />
       <Suspense fallback={null}>
-        <Character/>
+        <Character />
       </Suspense>
     </>
   )

@@ -4,12 +4,26 @@ Command: npx gltfjsx@6.2.13 public\models\character.glb -o src\components\charac
 */
 
 import * as THREE from 'three'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 
 type GLTFResult = GLTF & {
   nodes: {
+    skillBall: THREE.Mesh
+    Cube006: THREE.Mesh
+    Cube006_1: THREE.Mesh
+    Cube002: THREE.Mesh
+    Cube002_1: THREE.Mesh
+    Chair: THREE.Mesh
+    Cube007: THREE.Mesh
+    Cube007_1: THREE.Mesh
+    Cylinder008: THREE.Mesh
+    Cylinder008_1: THREE.Mesh
+    Cylinder008_2: THREE.Mesh
+    Keyboard: THREE.Mesh
+    Cube004: THREE.Mesh
+    Cube004_1: THREE.Mesh
     Cube063: THREE.SkinnedMesh
     Cube063_1: THREE.SkinnedMesh
     Cube063_2: THREE.SkinnedMesh
@@ -22,8 +36,16 @@ type GLTFResult = GLTF & {
     Cube040: THREE.SkinnedMesh
     Cube040_1: THREE.SkinnedMesh
     mixamorigHips: THREE.Bone
+    ball: THREE.Bone
+    Table: THREE.Bone
   }
   materials: {
+    Black: THREE.MeshStandardMaterial
+    Grey: THREE.MeshStandardMaterial
+    Hands: THREE.MeshStandardMaterial
+    Wood: THREE.MeshStandardMaterial
+    White: THREE.MeshStandardMaterial
+    Screen: THREE.MeshStandardMaterial
     Skin: THREE.MeshStandardMaterial
     Suit: THREE.MeshStandardMaterial
     Shirt: THREE.MeshStandardMaterial
@@ -37,7 +59,7 @@ type GLTFResult = GLTF & {
   }
 }
 
-type ActionName = 'standToSit' | 'typeToSit' | 'sitToType' | 'magic' | 'typing' | 'tPose' | 'sitToStand'
+type ActionName = 'dancing' | 'idle' | 'magic' | 'sitToStand' | 'sitToStandOld' | 'standToSit' | 'standToSitOld' | 'tPose' | 'typing'
 interface GLTFAction extends THREE.AnimationClip {
   name: ActionName;
 }
@@ -45,22 +67,53 @@ interface GLTFAction extends THREE.AnimationClip {
 interface MyGLTFResult extends GLTFResult {
   animations: GLTFAction[];
 }
-type ContextType = Record<string, React.ForwardRefExoticComponent<JSX.IntrinsicElements['skinnedMesh'] | JSX.IntrinsicElements['bone']>>
 
-export function Character(props: JSX.IntrinsicElements['group']) {
+type ContextType = Record<string, React.ForwardRefExoticComponent<JSX.IntrinsicElements['mesh'] | JSX.IntrinsicElements['skinnedMesh'] | JSX.IntrinsicElements['bone']>>
+
+export default function Character(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>(null!)
   const { nodes, materials, animations } = useGLTF('models/character.glb') as MyGLTFResult
-  const { actions, mixer } = useAnimations(animations, group)
-
+  const { actions, names, clips, mixer } = useAnimations(animations, group)
+  const materialToon = useMemo(() => new THREE.MeshToonMaterial({
+    color: "#42fff6",
+    transparent: false,
+    opacity: .6,
+    side: THREE.BackSide,
+  }), []);
+  nodes.skillBall.material = materialToon
+  mixer.addEventListener("finished",(e)=>{
+    console.log(e.action)
+    if(e.action._clip.name == "magic"){
+      actions.magic?.stop()
+      actions.standToSit?.play()
+    } else if(e.action._clip.name == "standToSit") {
+      actions.standToSit?.stop()
+      actions.typing?.play()
+    } else if(e.action._clip.name == "typing") {
+      actions.typing?.stop()
+      actions.sitToStand?.play()
+    } else if(e.action._clip.name == "sitToStand") {
+      actions.sitToStand?.stop()
+      actions.dancing?.play()
+    } else if(e.action._clip.name == "dancing") {
+      actions.dancing?.stop()
+      actions.magic?.play()
+    }
+  })
   useEffect(()=>{
+    names.forEach((name) => {
+      actions[name]?.setLoop(THREE.LoopOnce,1)
+    })
     actions.magic?.play()
+    
   },[])
-
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
-        <group name="characterRig" rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+        <group name="characterRig" rotation={[Math.PI / 2, 0, 0]} scale={0.012}>
           <primitive object={nodes.mixamorigHips} />
+          <primitive object={nodes.ball} />
+          <primitive object={nodes.Table} />
           <group name="Adventurer_Body">
             <skinnedMesh name="Cube063" geometry={nodes.Cube063.geometry} material={materials.Skin} skeleton={nodes.Cube063.skeleton} />
             <skinnedMesh name="Cube063_1" geometry={nodes.Cube063_1.geometry} material={materials.Suit} skeleton={nodes.Cube063_1.skeleton} />
@@ -86,6 +139,5 @@ export function Character(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('models/character.glb')
 
-export default Character
+useGLTF.preload('models/character.glb')

@@ -66,7 +66,7 @@ function Scene(props: {skill: Skill | undefined, setSkill: Dispatch<SetStateActi
     <directionalLight intensity={10} position={[17, 12, 13]} />
     <group ref={bubbleRef} >
     { sphereArray.map((position, i) =>
-        <Skill onClick={() => setSkill(skills[i])} index={i} position={position}/>
+        <Skill key={i} onClick={() => setSkill(skills[i])} index={i} position={position}/>
     )}
     </group>
   </>)
