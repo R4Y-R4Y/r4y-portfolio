@@ -1,18 +1,40 @@
-import { useContext, useState } from "react";
-import { createContext } from "vm";
+import { createContext, useContext, useState } from "react";
 
-const AnimationContext = createContext(null!)
-
+type Animations = "magic" | "type" | "dance"
+interface AnimationValues { 
+  animation: Animations, 
+  changeCurrentAnimation: Function
+}
+const AnimationContext = createContext<AnimationValues>({
+  animation: "magic",
+  changeCurrentAnimation: ()=>{}
+});
 export const AnimationProvider = (props: any) => {
-  const [animation, setAnimation] = useState()
+  const [selectedAnimation, setSelectedAnimation] = useState<Animations>("magic")
   
+  function changeCurrentAnimation(){
+    switch (selectedAnimation) {
+      case "magic":
+        setSelectedAnimation("type")
+        break;
+      case "type":
+        setSelectedAnimation("dance")
+        break;
+      case "dance":
+        setSelectedAnimation("magic")
+        break;
+    }
+  }
+
   return(
     <AnimationContext.Provider
       value={{
-        animation,
-        setAnimation
+        animation: selectedAnimation,
+        changeCurrentAnimation
       }}>
       {props.children}
     </AnimationContext.Provider>
   )
 }
+
+export const useCharacterAnimations = () => useContext(AnimationContext)

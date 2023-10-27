@@ -4,9 +4,10 @@ Command: npx gltfjsx@6.2.13 public\models\character.glb -o src\components\charac
 */
 
 import * as THREE from 'three'
-import React, { useEffect, useMemo, useRef } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
+import { useCharacterAnimations } from '@/context/AnimationContext'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -74,30 +75,36 @@ export default function Character(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>(null!)
   const { nodes, materials, animations } = useGLTF('models/character.glb') as MyGLTFResult
   const { actions, names, clips, mixer } = useAnimations(animations, group)
+  const [currentAction, setCurrentAction] = useState<ActionName>('magic')
+  const [hover, setHover] = useState(false)
   const materialToon = useMemo(() => new THREE.MeshToonMaterial({
     color: "#42fff6",
-    transparent: false,
-    opacity: .6,
     side: THREE.BackSide,
   }), []);
+  const { animation: selectedAnimation, changeCurrentAnimation } = useCharacterAnimations() 
   nodes.skillBall.material = materialToon
   mixer.addEventListener("finished",(e)=>{
-    console.log(e.action)
     if(e.action._clip.name == "magic"){
       actions.magic?.stop()
-      actions.standToSit?.play()
+      actions.magic?.play()
+      setCurrentAction("magic")
     } else if(e.action._clip.name == "standToSit") {
       actions.standToSit?.stop()
       actions.typing?.play()
+      setCurrentAction("typing")
     } else if(e.action._clip.name == "typing") {
       actions.typing?.stop()
-      actions.sitToStand?.play()
+      actions.typing?.play()
+      setCurrentAction("typing")
     } else if(e.action._clip.name == "sitToStand") {
       actions.sitToStand?.stop()
       actions.dancing?.play()
+      changeCurrentAnimation()
+      setCurrentAction("dancing")
     } else if(e.action._clip.name == "dancing") {
       actions.dancing?.stop()
-      actions.magic?.play()
+      actions.dancing?.play()
+      setCurrentAction("dancing")
     }
   })
   useEffect(()=>{
@@ -107,9 +114,53 @@ export default function Character(props: JSX.IntrinsicElements['group']) {
     actions.magic?.play()
     
   },[])
+
+  function changeAnimation(){
+    console.log("Current Action: ",currentAction, "Context Animation: ",selectedAnimation)
+
+    if(currentAction == "typing"){
+      actions.typing?.stop()
+      actions.sitToStand?.play()
+      return
+    }
+    if(currentAction == "sitToStand" || currentAction == "standToSit") return
+    
+    mixer.stopAllAction()
+    changeCurrentAnimation()
+    switch (selectedAnimation) {
+      case "dance":
+        actions.dancing?.play()
+        setCurrentAction("dancing")
+        break;
+      case "magic":
+        actions.magic?.play()
+        setCurrentAction("magic")
+        break;
+      case "type":
+        actions.standToSit?.play()
+        setCurrentAction("standToSit")
+        break;
+    }
+  }
+  
   return (
+    
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
+        <mesh 
+          onPointerOver={e => {
+            e.stopPropagation()
+            setHover(true)
+          }} 
+          onPointerOut={e => {
+            e.stopPropagation()
+            setHover(false)
+          }} 
+          onClick={() => changeAnimation()}
+          position={[0,1,0]}>
+          <sphereGeometry args={[2,16]}/>
+          <meshStandardMaterial color={hover ? "#f00" : "#8c0e00"} side={THREE.BackSide}/>
+        </mesh>
         <group name="characterRig" rotation={[Math.PI / 2, 0, 0]} scale={0.012}>
           <primitive object={nodes.mixamorigHips} />
           <primitive object={nodes.ball} />
@@ -138,6 +189,7 @@ export default function Character(props: JSX.IntrinsicElements['group']) {
     </group>
   )
 }
+
 
 
 useGLTF.preload('models/character.glb')
