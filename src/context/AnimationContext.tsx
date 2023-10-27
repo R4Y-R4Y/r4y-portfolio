@@ -10,7 +10,7 @@ const AnimationContext = createContext<AnimationValues>({
   changeCurrentAnimation: ()=>{}
 });
 export const AnimationProvider = (props: any) => {
-  const [selectedAnimation, setSelectedAnimation] = useState<Animations>("magic")
+  const [selectedAnimation, setSelectedAnimation] = useState<Animations>("type")
   
   function changeCurrentAnimation(){
     switch (selectedAnimation) {
