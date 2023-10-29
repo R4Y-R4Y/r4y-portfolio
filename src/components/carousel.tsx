@@ -8,6 +8,7 @@ import { skills } from '@/ts/skills';
 export default () => {
   return (
     <Swiper
+      className='w-screen'
       spaceBetween={50}
       slidesPerView={1}
       breakpoints={{

@@ -1,16 +1,14 @@
 "use-client"
-import { GizmoHelper, OrbitControls } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Suspense, useEffect, useRef, useState } from "react";
-import Bubble from "../models/bubble";
-import { MathUtils } from "three";
+import { Camera, Canvas } from "@react-three/fiber";
+import { Suspense, useState} from "react";
 import Character from "../character";
 import { AnimationProvider } from "@/context/AnimationContext";
-import { EffectComposer } from "@react-three/postprocessing";
 
 export default function HomeScene() {
+  // [-1.19,2.08,3.28]
+  // [-.27,-.285,-.08]
   return (
-    <Canvas>
+    <Canvas camera={{position: [-1.19,2.08,3.28], rotation: [-.27,-.285,-.08]}} >
       <Scene/>
     </Canvas>
   )
@@ -18,11 +16,12 @@ export default function HomeScene() {
 
 function Scene() {
 
+  const [cameraValue, setCameraValue] = useState<Camera>()
   return(
     <>
-      <OrbitControls />
+      {/* <OrbitControls onChange={(e) => {setCameraValue(e?.target.object)}} /> */}
       <ambientLight />
-      <GizmoHelper />
+      {/* <GizmoHelper /> */}
       {/* <gridHelper args={[10, 10]} /> */}
       <pointLight intensity={10} position={[2, 2, 2]} />
       <Suspense fallback={null}>
@@ -30,6 +29,16 @@ function Scene() {
           <Character />
         </AnimationProvider>
       </Suspense>
+      {/* <Html  position={[0,2,0]}>
+        <p>{cameraValue?.position.x}</p>
+        <p>{cameraValue?.position.y}</p>
+        <p>{cameraValue?.position.z}</p>
+      </Html>
+      <Html>
+        <p>{cameraValue?.rotation.x}</p>
+        <p>{cameraValue?.rotation.y}</p>
+        <p>{cameraValue?.rotation.z}</p>
+      </Html> */}
     </>
   )
 }

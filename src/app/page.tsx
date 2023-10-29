@@ -3,7 +3,8 @@ import Carousel from "@/components/carousel";
 import HomeScene from "@/components/scenes/intro_scene";
 import SkillBubbleScene from "@/components/scenes/skills_scene";
 import 'keen-slider/keen-slider.min.css'
-
+import { Variants, motion, useInView} from "framer-motion"
+import { useRef } from "react";
 
 export default function Home() {
   return (
@@ -15,17 +16,42 @@ export default function Home() {
   );
 }
 
+const textVariants: Variants = {
+  hidden:{scale: 0, rotate:180},
+  visible:{scale: 1, rotate: 0 }
+}
+
 function HomeSection() {
+  const ref = useRef<HTMLHtmlElement>(null)
+  const inView = useInView(ref)
   return (
-    <section>
+    <section ref={ref}>
       <div className="flex-1 text-center">
-        <h2 className="text-red-600 font-bold">Hello!</h2>
-        <h3 className="font-bold">My name is {" "} 
-         <span className="text-green-700">Rayen Nasraoui</span> 
-        </h3>
-        <h3 className="font-bold">I am a {" "} 
-         <span className="text-yellow-300">React Wizard</span> 
-        </h3>
+        <motion.h2
+          variants={{textVariants}}
+          animate={inView ? "visible" : "hidden"}
+          whileHover={{scale: 1.2, transition: {delay: 0}}}
+          transition={{delay: .3}}
+         className="font-bold">I am {" "} 
+         <span className="text-primary-500">Rayen Nasraoui</span> </motion.h2>
+        <motion.h3
+          variants={textVariants}
+          whileHover={{scale: 1.2, transition: {delay: 0}}}
+          transition={{delay: .5}}
+          animate={inView ? "visible" : "hidden"}
+          className="text-secondary-500 font-bold">
+          Software Fantasist
+        </motion.h3>
+
+        <motion.h3
+          variants={textVariants}
+          whileHover={{scale: 1.2, transition: {delay: 0}}}
+          transition={{delay: .7}}
+          animate={inView ? "visible" : "hidden"}
+          className="font-bold">
+          I am a {" "} 
+         <span className="text-accent-500">Dev Wizard</span> 
+        </motion.h3>
       </div>
       <div className="flex-1 h-screen">
         <HomeScene />

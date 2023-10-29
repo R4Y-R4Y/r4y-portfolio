@@ -2,15 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
 
 @layer base{
   section{
-    @apply flex flex-row items-center justify-evenly w-full h-screen md:mt-auto;
+    @apply flex flex-col md:flex-row items-center justify-evenly w-full h-screen md:mt-auto;
   }
   h2{
     @apply text-4xl
@@ -18,23 +13,73 @@
   h3{
     @apply text-2xl
   }
-}
 
-@media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --text-50: #190102;
+    --text-100: #320104;
+    --text-200: #640209;
+    --text-300: #96030d;
+    --text-400: #c80411;
+    --text-500: #fa0515;
+    --text-600: #fb3744;
+    --text-700: #fc6973;
+    --text-800: #fd9ba2;
+    --text-900: #fecdd0;
+    --text-950: #fee6e8;
+  
+    --background-50: #0d0d0d;
+    --background-100: #1a1a1a;
+    --background-200: #333333;
+    --background-300: #4d4d4d;
+    --background-400: #666666;
+    --background-500: #808080;
+    --background-600: #999999;
+    --background-700: #b3b3b3;
+    --background-800: #cccccc;
+    --background-900: #e6e6e6;
+    --background-950: #f2f2f2;
+    
+    --primary-50: #001a04;
+    --primary-100: #003309;
+    --primary-200: #006611;
+    --primary-300: #00991a;
+    --primary-400: #00cc22;
+    --primary-500: #00ff2b;
+    --primary-600: #33ff55;
+    --primary-700: #66ff80;
+    --primary-800: #99ffaa;
+    --primary-900: #ccffd5;
+    --primary-950: #e5ffea;
+    
+    --secondary-50: #011917;
+    --secondary-100: #02312f;
+    --secondary-200: #04625e;
+    --secondary-300: #05948d;
+    --secondary-400: #07c5bb;
+    --secondary-500: #09f6ea;
+    --secondary-600: #3af8ee;
+    --secondary-700: #6bfaf3;
+    --secondary-800: #9dfbf7;
+    --secondary-900: #cefdfb;
+    --secondary-950: #e6fefd;
+    
+    --accent-50: #170304;
+    --accent-100: #2d0608;
+    --accent-200: #5b0b0f;
+    --accent-300: #881117;
+    --accent-400: #b6161e;
+    --accent-500: #e31c26;
+    --accent-600: #e94951;
+    --accent-700: #ee777d;
+    --accent-800: #f4a4a8;
+    --accent-900: #f9d2d4;
+    --accent-950: #fce8e9;
+    
   }
 }
 
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--text-950);
+  background: var(--background-100)
 }
+

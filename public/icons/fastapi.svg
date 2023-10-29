@@ -6,6 +6,6 @@
 	.st0{fill:#05998B;}
 	.st1{fill:#FFFFFF;}
 </style>
-<circle class="st0" cx="14.8" cy="-14.8" r="14.8"/>
-<path class="st1" d="M15.6-26L8.2-12.5h6.7l-0.7,9L21.6-17h-6.7L15.6-26z"/>
+<circle fill="#05998B" cx="14.8" cy="-14.8" r="14.8"/>
+<path fill="#FFFFFF" d="M15.6-26L8.2-12.5h6.7l-0.7,9L21.6-17h-6.7L15.6-26z"/>
 </svg>
