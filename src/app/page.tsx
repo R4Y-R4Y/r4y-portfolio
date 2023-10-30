@@ -26,18 +26,20 @@ function HomeSection() {
   const inView = useInView(ref)
   return (
     <section ref={ref}>
-      <div className="flex-1 text-left ml-20 md:ml-40 mt-80 md:mt-0">
+      <div className="flex-1 text-left ml-10 md:ml-32 mt-80 md:mt-0">
         <motion.h2
           variants={{textVariants}}
           animate={inView ? "visible" : "hidden"}
           whileHover={{scale: 1.2, transition: {delay: 0}}}
-          transition={{delay: .3}}
-         className="font-bold">I am {" "} 
+          transition={{delay: .5}}
+          style={{transformOrigin:"left bottom"}}
+         className=" font-bold mb-4">I am {" "} 
          <span className="text-primary-500">Rayen Nasraoui</span> </motion.h2>
         <motion.h3
           variants={textVariants}
           whileHover={{scale: 1.2, transition: {delay: 0}}}
-          transition={{delay: .5}}
+          transition={{delay: .7}}
+          style={{transformOrigin:"left bottom"}}
           animate={inView ? "visible" : "hidden"}
           className="text-secondary-500 font-bold">
           Software Fantasist
@@ -46,14 +48,28 @@ function HomeSection() {
         <motion.h3
           variants={textVariants}
           whileHover={{scale: 1.2, transition: {delay: 0}}}
-          transition={{delay: .7}}
+          transition={{delay: 1}}
+          style={{transformOrigin:"left bottom"}}
           animate={inView ? "visible" : "hidden"}
           className="font-bold">
           & {" "} 
          <span className="text-accent-500">Dev Wizard</span> 
         </motion.h3>
+        <motion.p
+          className="mt-10 pr-20 lg:p-auto"
+        >
+          I'm a software engineer based in Tunisia, I specialize in building
+          (and occasionally designing) exceptional digital experiences. 
+          Currently, I'm focused on my studies and looking for an end of studies internship.
+          Hopefully, I'll be graduating in 2024. and will look for job opportunities or a master's degree.
+        </motion.p>
+        <motion.p
+          className="mt-10 pr-20 lg:p-auto"
+        >
+          Click on the bubble in the character i made to see some cool animations.
+        </motion.p>
       </div>
-      <div className="flex-1 h-screen">
+      <div className="flex-1 h-screen w-screen lg:w-auto">
         <HomeScene />
       </div>
     </section>
@@ -62,7 +78,13 @@ function HomeSection() {
 
 function WorkSection() {
   return(
-    <section>
+    // make them stack on top of each other on mobile and pc
+    <section
+      className="flex flex-col items-center justify-center h-screen mt-48"
+    >
+      <h2 className="text-accent-500 font-bold">
+        Projects & Work
+      </h2>
       <Carousel/>
     </section>
   )
@@ -70,7 +92,9 @@ function WorkSection() {
 
 function SkillsSection() {
   return(
-    <section>
+    <section
+      className="mt-20"
+    >
       <SkillBubbleScene />
     </section>
   )

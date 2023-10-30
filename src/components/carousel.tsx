@@ -11,6 +11,7 @@ export default () => {
       className='w-screen'
       spaceBetween={50}
       slidesPerView={1}
+      navigation={true}
       breakpoints={{
         768: {
           slidesPerView: 2,
@@ -31,7 +32,7 @@ export default () => {
                 <div className='text-5xl mt-2 max-w-[5rem] mx-auto min-w-[5rem] min-h-[5rem] rounded-full grid place-items-center'>
                   A
                 </div>
-                <h2>{skill.name}</h2>
+                <h3>{skill.name}</h3>
                 <p className='mt-3'>
                   {skill.description}
                 </p>
