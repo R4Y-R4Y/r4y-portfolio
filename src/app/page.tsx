@@ -26,7 +26,7 @@ function HomeSection() {
   const inView = useInView(ref)
   return (
     <section ref={ref}>
-      <div className="flex-1 text-center">
+      <div className="flex-1 text-left ml-20 md:ml-40 mt-80 md:mt-0">
         <motion.h2
           variants={{textVariants}}
           animate={inView ? "visible" : "hidden"}
@@ -49,7 +49,7 @@ function HomeSection() {
           transition={{delay: .7}}
           animate={inView ? "visible" : "hidden"}
           className="font-bold">
-          I am a {" "} 
+          & {" "} 
          <span className="text-accent-500">Dev Wizard</span> 
         </motion.h3>
       </div>
