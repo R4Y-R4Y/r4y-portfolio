@@ -16,13 +16,13 @@ export default function SkillBubbleScene() {
 
   return (
   <>
-    <div className="flex-1 h-screen w-screen lg:w-auto">
+    <div className="flex-1 h-screen w-screen lg:w-1/2">
       <Canvas camera={{ position:[15,7,25] }} > 
         <Scene skill={skill} setSkill={setSkill} />
       </Canvas>
     </div>
     <div className="flex-1 p-10 text-center">
-      <h2 className="text-red-600 font-bold">Skill: {skill?.name} </h2>
+      <h2 className="text-primary-400 font-bold">Skill: {skill?.name} </h2>
       <h3 className="font-bold">Description: {skill?.description} </h3>
       
     </div>
@@ -85,7 +85,7 @@ function Skill(props:{index: number, position: Vector3, onClick: Function}) {
         e.stopPropagation()
         onClick()
       }} materialProps={{color: "#30afeb"}} position={position}  />
-      <SVG3DModel ref={ref} position={position} index={index}/>
+      <SVG3DModel ref={ref} position={position} path={skills[index].icon}/>
     </>
   )
 }

@@ -5,6 +5,9 @@ import SkillBubbleScene from "@/components/scenes/skills_scene";
 import 'keen-slider/keen-slider.min.css'
 import { Variants, motion, useInView} from "framer-motion"
 import { useRef } from "react";
+import { Canvas } from "@react-three/fiber";
+import { Float } from "@react-three/drei";
+import { SVG3DModel } from "@/components/models/loader";
 
 export default function Home() {
   return (
@@ -12,6 +15,7 @@ export default function Home() {
       <HomeSection />
       <WorkSection />
       <SkillsSection />
+      <ContactSection />
     </main>
   );
 }
@@ -25,8 +29,8 @@ function HomeSection() {
   const ref = useRef<HTMLHtmlElement>(null)
   const inView = useInView(ref)
   return (
-    <section ref={ref}>
-      <div className="flex-1 text-left ml-10 md:ml-32 mt-80 md:mt-0">
+    <section ref={ref} className="mt-24" >
+      <div className="flex-1 text-left ml-10 md:ml-16">
         <motion.h2
           variants={{textVariants}}
           animate={inView ? "visible" : "hidden"}
@@ -58,10 +62,10 @@ function HomeSection() {
         <motion.p
           className="mt-10 pr-20 lg:p-auto"
         >
-          I'm a software engineer based in Tunisia, I specialize in building
+          I&apos;m a software engineer based in Tunisia, I specialize in building
           (and occasionally designing) exceptional digital experiences. 
-          Currently, I'm focused on my studies and looking for an end of studies internship.
-          Hopefully, I'll be graduating in 2024. and will look for job opportunities or a master's degree.
+          Currently, I&apos;m focused on my studies and looking for an end of studies internship.
+          Hopefully, I&apos;ll be graduating in 2024. and will look for job opportunities or a master&apos;s degree.
         </motion.p>
         <motion.p
           className="mt-10 pr-20 lg:p-auto"
@@ -69,7 +73,7 @@ function HomeSection() {
           Click on the bubble in the character i made to see some cool animations.
         </motion.p>
       </div>
-      <div className="flex-1 h-screen w-screen lg:w-auto">
+      <div className="relative flex-1 h-max w-screen lg:w-1/2">
         <HomeScene />
       </div>
     </section>
@@ -97,6 +101,59 @@ function SkillsSection() {
     >
       <SkillBubbleScene />
     </section>
+  )
+}
+
+const socialContacts = [
+  { name: 'GitHub', url: 'https://github.com/yourusername' },
+  { name: 'LinkedIn', url: 'https://linkedin.com/in/yourusername' },
+  { name: 'Email', url: 'mailto:rayen159nasraoui@outlook.com' },
+  { name: 'Upwork', url: 'https://www.upwork.com/freelancers/~01f1b0b3b1b1b1b1b1' },
+  { name: 'Discord', url: 'https://discord.com/users/yourusername' },
+  { name: 'Facebook', url: 'https://www.facebook.com/yourusername' },
+  { name: 'Phone', url: 'tel:+216 52 52 52 52' },
+];
+
+
+function ContactSection() {
+  return (
+    <section className="flex-col sm:mt-0 mt-20 p-4">
+      
+      <h2 className="font-bold mb-4">Social Contacts</h2>
+      <p className="mb-8">You can find me on these platforms:</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {socialContacts.map((contact, index) => (
+          <motion.div
+            key={index}
+            className="p-4 bg-primary-600 rounded hover:bg-primary-700"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+          >
+            <a href={contact.url} className="flex flex-col items-center justify-center h-full text-white">
+              <Canvas>
+                <FloatingIcon/>
+              </Canvas>
+              <span className="ml-2">{contact.name}</span>
+            </a>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+
+
+function FloatingIcon(){
+
+  return(
+    <Float speed={3} floatIntensity={3}>
+      <mesh>
+        <SVG3DModel path="icons/android.svg" />
+        <meshStandardMaterial color="hotpink" />
+      </mesh>
+    </Float>
   )
 }
 

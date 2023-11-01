@@ -3,20 +3,21 @@ import { GroupProps, useLoader } from "@react-three/fiber";
 import { forwardRef, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three"
 import { skills } from "@/ts/skills";
-export const SVG3DModel = forwardRef<THREE.Group,{ index: number } & GroupProps>((props , ref) => {
-  const {index, ...groupProps} = props
-  const svg: SVGResult = useMemo(() => useLoader(SVGLoader, skills[index].icon),[])
+export const SVG3DModel = forwardRef<THREE.Group,{ path: string } & GroupProps>((props , ref) => {
+  
+  const {path, ...groupProps} = props
+  const svg: SVGResult = useLoader(SVGLoader, path)
   
   const shapes = useMemo(
     () => svg.paths.map((path, i) => {
       return { shape: SVGLoader.createShapes(path), color: path.color };
     })
-  ,[index]);
+  ,[path]);
 
   const meshes = useMemo(() => shapes.map((shape, i) => new THREE.Mesh(
     new THREE.ExtrudeGeometry(shape.shape, { depth: i, bevelEnabled: true, bevelThickness: i==0 ? .2 : .1 }),
     new THREE.MeshBasicMaterial({color: shape.color})
-  )),[index])
+  )),[path])
 
   const addingRef = useRef<THREE.Mesh>(null!)
 

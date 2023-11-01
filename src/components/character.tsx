@@ -159,7 +159,7 @@ export default function Character(props: JSX.IntrinsicElements['group']) {
           onClick={() => changeAnimation()}
           position={[0,1,0]}>
           <sphereGeometry args={[2,16]}/>
-          <meshToonMaterial color={hover ? "#c11818" : "#8c0e00"} side={THREE.BackSide}/>
+          <meshToonMaterial color={hover ? '#ec13e8' : "#8e0b8b"} side={THREE.BackSide}/>
         </mesh>
         <group name="characterRig" rotation={[Math.PI / 2, 0, 0]} scale={0.012}>
           <primitive object={nodes.mixamorigHips} />

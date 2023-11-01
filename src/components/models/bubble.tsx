@@ -1,6 +1,7 @@
 import { MeshProps } from "@react-three/fiber";
 import { forwardRef, useMemo } from "react";
 import * as THREE from "three";
+import twconfig from "../../../tailwind.config";
 
 type MyProps = MeshProps & {
   materialProps?: THREE.MeshToonMaterialParameters;
@@ -8,7 +9,7 @@ type MyProps = MeshProps & {
 
 const Bubble = forwardRef<THREE.Mesh, MyProps>((props,ref)=> {
   const { materialProps, ...meshProps} = props
-  
+
   const materialToon = useMemo(() => new THREE.MeshToonMaterial({
     color: "#42fff6",
     transparent: false,
@@ -22,7 +23,7 @@ const Bubble = forwardRef<THREE.Mesh, MyProps>((props,ref)=> {
     <mesh 
       onPointerOver={e => {
         e.stopPropagation()
-        materialToon.color.set("#f00")
+        materialToon.color.set("#8e0b8b")
       }} 
       onPointerOut={e => {
         e.stopPropagation()

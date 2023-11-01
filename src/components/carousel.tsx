@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { skills } from '@/ts/skills';
 
-export default () => {
+const Carousel = () => {
   return (
     <Swiper
       className='w-screen'
@@ -58,3 +58,5 @@ export default () => {
     </Swiper>
   );
 };
+
+export default Carousel
