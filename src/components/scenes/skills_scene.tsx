@@ -16,7 +16,7 @@ export default function SkillBubbleScene() {
 
   return (
   <>
-    <div className="flex-1 h-screen w-screen lg:w-1/2">
+    <div className="h-screen w-screen lg:w-1/2">
       <Canvas camera={{ position:[15,7,25] }} > 
         <Scene skill={skill} setSkill={setSkill} />
       </Canvas>

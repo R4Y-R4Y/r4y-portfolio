@@ -151,10 +151,12 @@ export default function Character(props: JSX.IntrinsicElements['group']) {
           onPointerOver={e => {
             e.stopPropagation()
             setHover(true)
+            document.body.style.cursor = "pointer"
           }} 
           onPointerOut={e => {
             e.stopPropagation()
             setHover(false)
+            document.body.style.cursor = "default"
           }} 
           onClick={() => changeAnimation()}
           position={[0,1,0]}>

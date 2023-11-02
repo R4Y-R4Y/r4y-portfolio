@@ -73,7 +73,7 @@ function HomeSection() {
           Click on the bubble in the character i made to see some cool animations.
         </motion.p>
       </div>
-      <div className="relative flex-1 h-max w-screen lg:w-1/2">
+      <div className="min-h-0 min-w-0 h-screen w-screen lg:w-1/2">
         <HomeScene />
       </div>
     </section>
@@ -83,9 +83,7 @@ function HomeSection() {
 function WorkSection() {
   return(
     // make them stack on top of each other on mobile and pc
-    <section
-      className="flex flex-col items-center justify-center h-screen mt-48"
-    >
+    <section className="flex flex-col items-center justify-center h-screen mt-8">
       <h2 className="text-accent-500 font-bold">
         Projects & Work
       </h2>

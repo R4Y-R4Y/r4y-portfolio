@@ -24,10 +24,12 @@ const Bubble = forwardRef<THREE.Mesh, MyProps>((props,ref)=> {
       onPointerOver={e => {
         e.stopPropagation()
         materialToon.color.set("#8e0b8b")
+        document.body.style.cursor = "pointer"
       }} 
       onPointerOut={e => {
         e.stopPropagation()
         materialToon.color.set(materialProps?.color ?? "#42fff6")
+        document.body.style.cursor = "default"
       }}
       material={materialToon} 
       ref={ref}
