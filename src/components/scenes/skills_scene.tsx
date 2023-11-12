@@ -21,7 +21,7 @@ export default function SkillBubbleScene() {
         <Scene skill={skill} setSkill={setSkill} />
       </Canvas>
     </div>
-    <div className="flex-1 p-10 text-center">
+    <div className="p-10 text-center w-screen lg:w-1/2">
       <h2 className="text-primary-400 font-bold">Skill: {skill?.name} </h2>
       <h3 className="font-bold">Description: {skill?.description} </h3>
       
@@ -84,7 +84,7 @@ function Skill(props:{index: number, position: Vector3, onClick: Function}) {
       <Bubble onClick={e => {
         e.stopPropagation()
         onClick()
-      }} materialProps={{color: "#30afeb"}} position={position}  />
+      }} position={position}  />
       <SVG3DModel ref={ref} position={position} path={skills[index].icon}/>
     </>
   )

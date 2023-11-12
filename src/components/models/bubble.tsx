@@ -11,7 +11,7 @@ const Bubble = forwardRef<THREE.Mesh, MyProps>((props,ref)=> {
   const { materialProps, ...meshProps} = props
 
   const materialToon = useMemo(() => new THREE.MeshToonMaterial({
-    color: "#42fff6",
+    color: "#6633ff",
     transparent: false,
     opacity: .6,
     side: THREE.BackSide,
@@ -28,7 +28,7 @@ const Bubble = forwardRef<THREE.Mesh, MyProps>((props,ref)=> {
       }} 
       onPointerOut={e => {
         e.stopPropagation()
-        materialToon.color.set(materialProps?.color ?? "#42fff6")
+        materialToon.color.set(materialProps?.color ?? "#6633ff")
         document.body.style.cursor = "default"
       }}
       material={materialToon} 

@@ -78,7 +78,7 @@ export default function Character(props: JSX.IntrinsicElements['group']) {
   const [currentAction, setCurrentAction] = useState<ActionName>('magic')
   const [hover, setHover] = useState(false)
   const materialToon = useMemo(() => new THREE.MeshToonMaterial({
-    color: "#42fff6",
+    color: "#6633ff",
     side: THREE.BackSide,
   }), []);
   const { animation: selectedAnimation, changeCurrentAnimation } = useCharacterAnimations() 

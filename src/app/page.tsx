@@ -21,15 +21,15 @@ export default function Home() {
 }
 
 const textVariants: Variants = {
-  hidden:{scale: 0, rotate:180},
-  visible:{scale: 1, rotate: 0 }
+  hidden:{scale: 0, rotate:180, opacity: 0},
+  visible:{scale: 1, rotate: 0 , opacity: 1}
 }
 
 function HomeSection() {
   const ref = useRef<HTMLHtmlElement>(null)
   const inView = useInView(ref)
   return (
-    <section ref={ref} className="mt-24" >
+    <section ref={ref} className="mt-20 lg:mt-10" >
       <div className="flex-1 text-left ml-10 md:ml-16">
         <motion.h2
           variants={{textVariants}}
@@ -103,34 +103,30 @@ function SkillsSection() {
 }
 
 const socialContacts = [
-  { name: 'GitHub', url: 'https://github.com/yourusername' },
-  { name: 'LinkedIn', url: 'https://linkedin.com/in/yourusername' },
-  { name: 'Email', url: 'mailto:rayen159nasraoui@outlook.com' },
-  { name: 'Upwork', url: 'https://www.upwork.com/freelancers/~01f1b0b3b1b1b1b1b1' },
-  { name: 'Discord', url: 'https://discord.com/users/yourusername' },
-  { name: 'Facebook', url: 'https://www.facebook.com/yourusername' },
-  { name: 'Phone', url: 'tel:+216 52 52 52 52' },
+  { name: 'GitHub', url: 'https://github.com/yourusername', path:'/icons/github.svg' },
+  { name: 'LinkedIn', url: 'https://linkedin.com/in/yourusername', path:'/icons/linkedin.svg' },
+  { name: 'Email', url: 'mailto:rayen159nasraoui@outlook.com', path:'/icons/mail.svg' },
+  { name: 'Upwork', url: 'https://www.upwork.com/freelancers/~01f1b0b3b1b1b1b1b1', path:'/icons/upwork.svg' },
 ];
 
 
 function ContactSection() {
   return (
     <section className="flex-col sm:mt-0 mt-20 p-4">
-      
-      <h2 className="font-bold mb-4">Social Contacts</h2>
+      <h2 className="text-accent-500 font-bold mb-4">Social Contacts</h2>
       <p className="mb-8">You can find me on these platforms:</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {socialContacts.map((contact, index) => (
           <motion.div
             key={index}
-            className="p-4 bg-primary-600 rounded hover:bg-primary-700"
+            className="p-4 bg-accent-400 rounded hover:bg-primary-700"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
           >
             <a href={contact.url} className="flex flex-col items-center justify-center h-full text-white">
               <Canvas>
-                <FloatingIcon/>
+                <FloatingIcon path={contact.path} />
               </Canvas>
               <span className="ml-2">{contact.name}</span>
             </a>
@@ -143,12 +139,12 @@ function ContactSection() {
 
 
 
-function FloatingIcon(){
+function FloatingIcon({path}:{path:string}){
 
   return(
     <Float speed={3} floatIntensity={3}>
       <mesh>
-        <SVG3DModel path="icons/android.svg" />
+        <SVG3DModel path={path} />
         <meshStandardMaterial color="hotpink" />
       </mesh>
     </Float>
