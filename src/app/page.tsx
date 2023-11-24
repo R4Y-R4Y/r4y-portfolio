@@ -126,7 +126,9 @@ function ContactSection() {
           >
             <a href={contact.url} className="flex flex-col items-center justify-center h-full text-white">
               <Canvas>
-                <FloatingIcon path={contact.path} />
+                <Suspense fallback={null}>
+                  <FloatingIcon path={contact.path} />
+                </Suspense>
               </Canvas>
               <span className="ml-2">{contact.name}</span>
             </a>

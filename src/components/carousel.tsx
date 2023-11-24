@@ -5,7 +5,7 @@ import ReactCardFlip from "react-card-flip";
 // Import Swiper styles
 import 'swiper/css';
 import { jobs, skills } from '@/ts/skills';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 
 const Carousel = () => {
@@ -41,7 +41,9 @@ const Carousel = () => {
               <h3>{job.name}</h3>
               <div className='w-80 h-36'>
                 <Canvas>
-                  <job.scene/>
+                  <Suspense fallback={null}>
+                    <job.scene/>
+                  </Suspense>
                 </Canvas>
               </div>
               <p className='mt-3'></p>
