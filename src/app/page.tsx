@@ -29,7 +29,7 @@ function HomeSection() {
   const ref = useRef<HTMLHtmlElement>(null)
   const inView = useInView(ref)
   return (
-    <section ref={ref} className="mt-20 lg:mt-10" >
+    <section ref={ref} id="home" className="mt-20 lg:mt-10" >
       <div className="flex-1 text-left ml-10 md:ml-16">
         <motion.h2
           variants={{textVariants}}
@@ -63,7 +63,7 @@ function HomeSection() {
           className="mt-10 pr-20 lg:p-auto"
         >
           I&apos;m a software engineer based in Tunisia, I specialize in building
-          (and occasionally designing) exceptional digital experiences. 
+          & designing exceptional digital experiences. 
           Currently, I&apos;m focused on my studies and looking for an end of studies internship.
           Hopefully, I&apos;ll be graduating in 2024. and will look for job opportunities or a master&apos;s degree.
         </motion.p>
@@ -73,7 +73,7 @@ function HomeSection() {
           Click on the bubble in the character i made to see some cool animations.
         </motion.p>
       </div>
-      <div className="min-h-0 min-w-0 h-screen w-screen lg:w-1/2">
+      <div className="min-h-0 min-w-0 h-[100vw] w-[100vw] md:h-screen lg:w-1/2">
         <HomeScene />
       </div>
     </section>
@@ -83,7 +83,7 @@ function HomeSection() {
 function WorkSection() {
   return(
     // make them stack on top of each other on mobile and pc
-    <section className="flex flex-col items-center justify-center h-screen mt-8">
+    <section id="projects" className="flex flex-col items-center justify-center h-screen mt-8">
       <h2 className="text-accent-500 font-bold">
         Projects & Work
       </h2>
@@ -94,9 +94,7 @@ function WorkSection() {
 
 function SkillsSection() {
   return(
-    <section
-      className="mt-20"
-    >
+    <section id="skills" className="mt-20">
       <SkillBubbleScene />
     </section>
   )
@@ -112,7 +110,7 @@ const socialContacts = [
 
 function ContactSection() {
   return (
-    <section className="flex-col sm:mt-0 mt-20 p-4">
+    <section id="contact" className="flex-col sm:mt-0 mt-20 p-4">
       <h2 className="text-accent-500 font-bold mb-4">Social Contacts</h2>
       <p className="mb-8">You can find me on these platforms:</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">

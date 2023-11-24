@@ -8,10 +8,10 @@ export function Iberis() {
       <pointLight position={[0, 0, 7]} intensity={20} />
       <PerspectiveCamera makeDefault position={[0, 1, 7]} />
       <Float>
-        <SVG3DModel position={[-3,0,0]} path="/icons/bank.svg" />
+        <SVG3DModel position={[-3,5,0]} path="/icons/bank.svg" />
       </Float>
       <Float>
-        <SVG3DModel position={[3,0,0]} path="/icons/table.svg" />
+        <SVG3DModel position={[3,5,0]} path="/icons/table.svg" />
       </Float>
     </>
   )

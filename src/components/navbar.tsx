@@ -3,7 +3,6 @@ import Link from "next/link";
 import { FC, useState } from "react";
 
 const navigation = [
-  { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
   { name: 'Projects', href: '#projects' },
   { name: 'Skills', href: '#skills' },
@@ -11,7 +10,7 @@ const navigation = [
 ]
 
 export const Navbar: FC = () => {
-  const [current, setCurrent] = useState("Home")
+  const [current, setCurrent] = useState("About")
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -72,6 +71,7 @@ export const Navbar: FC = () => {
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
+                    
                     href={item.href}
                     className= {current == item.name ?
                     "text-primary-100 bg-gray-300 hover:bg-white  px-3 py-2 rounded-md text-sm font-medium"  :

@@ -10,7 +10,7 @@ export default function HomeScene() {
   // [-.27,-.285,-.08]
   return (
     <>
-      <Canvas camera={{position: [-1.19,1.88,3.28], rotation: [-.27,-.285,-.08]}} >
+      <Canvas camera={{position: [-1,1.88,3.28], rotation: [-.27,-.285,-.08]}} >
         <Scene/>
       </Canvas>
     </>
