@@ -4,9 +4,9 @@ import HomeScene from "@/components/scenes/intro_scene";
 import SkillBubbleScene from "@/components/scenes/skills_scene";
 import 'keen-slider/keen-slider.min.css'
 import { Variants, motion, useInView} from "framer-motion"
-import { useRef } from "react";
+import { Suspense, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Float } from "@react-three/drei";
+import { Float, Loader } from "@react-three/drei";
 import { SVG3DModel } from "@/components/models/loader";
 
 export default function Home() {

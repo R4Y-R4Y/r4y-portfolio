@@ -3,20 +3,23 @@ import { Camera, Canvas } from "@react-three/fiber";
 import { Suspense, useState} from "react";
 import Character from "../character";
 import { AnimationProvider } from "@/context/AnimationContext";
+import { Loader } from "@react-three/drei";
 
 export default function HomeScene() {
   // [-1.19,2.08,3.28]
   // [-.27,-.285,-.08]
   return (
-    <Canvas camera={{position: [-1.19,2.08,3.28], rotation: [-.27,-.285,-.08]}} >
-      <Scene/>
-    </Canvas>
+    <>
+      <Canvas camera={{position: [-1.19,1.88,3.28], rotation: [-.27,-.285,-.08]}} >
+        <Scene/>
+      </Canvas>
+    </>
   )
 }
 
 function Scene() {
 
-  const [cameraValue, setCameraValue] = useState<Camera>()
+  // const [cameraValue, setCameraValue] = useState<Camera>()
   return(
     <>
       {/* <OrbitControls onChange={(e) => {setCameraValue(e?.target.object)}} /> */}
@@ -24,11 +27,10 @@ function Scene() {
       {/* <GizmoHelper /> */}
       {/* <gridHelper args={[10, 10]} /> */}
       <pointLight intensity={10} position={[2, 2, 2]} />
-      <Suspense fallback={null}>
+
         <AnimationProvider>
           <Character />
         </AnimationProvider>
-      </Suspense>
       {/* <Html  position={[0,2,0]}>
         <p>{cameraValue?.position.x}</p>
         <p>{cameraValue?.position.y}</p>

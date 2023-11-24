@@ -1,11 +1,12 @@
 "use-client"
-import { PerspectiveCamera } from "@react-three/drei";
+import { Loader, PerspectiveCamera } from "@react-three/drei";
 import { Canvas, Vector3, useFrame } from "@react-three/fiber";
 import Bubble from "../models/bubble";
 import { SVG3DModel } from "../models/loader";
-import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { Dispatch, SetStateAction, Suspense, useRef, useState } from "react";
 import * as THREE from "three"
-import { Skill, fibonacciSphere, skills } from "@/ts/skills";
+import { fibonacciSphere, skills } from "@/ts/skills";
+import type { Skill } from "@/ts/skills";
 import { useControls } from "leva";
 
 
@@ -23,8 +24,10 @@ export default function SkillBubbleScene() {
     </div>
     <div className="p-10 text-center w-screen lg:w-1/2">
       <h2 className="text-primary-400 font-bold">Skill: {skill?.name} </h2>
-      <h3 className="font-bold">Description: {skill?.description} </h3>
-      
+      <h3 className="font-bold">Projects:  </h3>
+      <ul className="list-disc list-inside">
+        {skill?.projects.map((project, i) => <li key={i}>{project}</li>)}
+      </ul>
     </div>
   </>
   );

@@ -1,7 +1,6 @@
 import { MeshProps } from "@react-three/fiber";
 import { forwardRef, useMemo } from "react";
 import * as THREE from "three";
-import twconfig from "../../../tailwind.config";
 
 type MyProps = MeshProps & {
   materialProps?: THREE.MeshToonMaterialParameters;
@@ -38,6 +37,6 @@ const Bubble = forwardRef<THREE.Mesh, MyProps>((props,ref)=> {
     </mesh>
   );
 })
-
+Bubble.displayName = "Bubble";
 export default Bubble
 
