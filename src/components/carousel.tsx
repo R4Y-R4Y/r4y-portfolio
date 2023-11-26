@@ -7,38 +7,47 @@ import { Job, jobs} from '@/ts/skills';
 import { Suspense, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 
+import { Navigation, Pagination, Scrollbar } from 'swiper/modules';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
 const Carousel = () => {
-  const [current, setCurrent] = useState(1)
   return (
-    <Swiper
-      className='w-screen'
-      spaceBetween={50}
-      slidesPerView={1}
-      navigation={true}
-      breakpoints={{
-        768: {
-          slidesPerView: 2,
-          spaceBetween: 40,
-        },
-        1024: {
-          slidesPerView: 3,
-          spaceBetween: 50,
-        },
-      }}
-      onSlideChange={(cur) => setCurrent(cur.activeIndex)}
-    >
-      {
-        jobs.map((job,i) => 
-        <SwiperSlide key={i}>
-          <motion.div className='h-96 flex justify-center'>
-            
-            <Slide job={job}/>
-          </motion.div>
-        </SwiperSlide>
-        )
-      }
-      
-    </Swiper>
+    <>
+      <Swiper
+        modules={[Navigation, Pagination, Scrollbar]}
+        className='w-screen mt-10'
+        spaceBetween={50}
+        slidesPerView={1}
+        navigation={{enabled: true}}
+        breakpoints={{
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 40,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 50,
+          },
+        }}
+        
+      >
+        {
+          jobs.map((job,i) => 
+          <SwiperSlide key={i}>
+            <motion.div className='h-96 flex justify-center'>
+              
+              <Slide job={job}/>
+            </motion.div>
+          </SwiperSlide>
+          )
+        }
+      </Swiper>
+    </>
   );
 };
 

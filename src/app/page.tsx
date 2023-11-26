@@ -111,7 +111,7 @@ const socialContacts = [
   { name: 'GitHub', url: 'https://github.com/r4y-r4y', path:'/icons/github.svg' },
   { name: 'LinkedIn', url: 'https://linkedin.com/in/rayen-nasraoui-603b22203/', path:'/icons/linkedin.svg' },
   { name: 'Email', url: 'mailto:rayen159nasraoui@outlook.com', path:'/icons/mail.svg' },
-  { name: 'Upwork', url: 'https://www.upwork.com/freelancers/~01f1b0b3b1b1b1b1b1', path:'/icons/upwork.svg' },
+  { name: 'Upwork', url: 'https://www.upwork.com/freelancers/~015c72f4584bb9f5a0', path:'/icons/upwork.svg' },
 ];
 
 
