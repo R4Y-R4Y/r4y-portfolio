@@ -19,22 +19,21 @@ export default function SkillBubbleScene() {
   <>
     <div className="min-h-0 min-w-0 h-[100vw] w-[100vw] md:h-screen lg:w-1/2">
       <Canvas camera={{ position:[15,7,25] }} > 
-        <Scene skill={skill} setSkill={setSkill} />
+        <Scene setSkill={setSkill} />
       </Canvas>
     </div>
-    <div className="p-10 text-center w-screen lg:w-1/2">
-      <h2 className="text-primary-400 font-bold">Skill: {skill?.name} </h2>
-      <h3 className="font-bold">Projects:  </h3>
+    <div className="min-h-0 min-w-0 h-[100vw] w-[100vw] md:h-screen lg:w-1/2 lg:pt-20 lg:pb-20 grid justify-items-center ">
+      <h2 className="text-primary-400 font-bold text-center">Skill: {skill?.name} </h2>
       <ul className="list-disc list-inside">
-        {skill?.projects.map((project, i) => <li key={i}>{project}</li>)}
+        {skill?.projects.map((project, i) => <h3 key={i}><li>{project}</li></h3>)}
       </ul>
     </div>
   </>
   );
 }
 
-function Scene(props: {skill: Skill | undefined, setSkill: Dispatch<SetStateAction<Skill | undefined>>}){
-  const {skill, setSkill} = props
+function Scene(props: {setSkill: Dispatch<SetStateAction<Skill | undefined>>}){
+  const {setSkill} = props
   // const {radius} = useControls({radius: 13})
   const radius = 13
   const sphereArray = fibonacciSphere(skills.length, radius)

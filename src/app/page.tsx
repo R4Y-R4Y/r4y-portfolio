@@ -94,9 +94,16 @@ function WorkSection() {
 
 function SkillsSection() {
   return(
-    <section id="skills" className="mt-20">
-      <SkillBubbleScene />
-    </section>
+    <>
+      <section id="skills" className="mt-20 flex flex-col">
+        <h2 className="text-accent-500 font-bold center">
+          Skills & Tools
+        </h2>
+        <div className="flex flex-col lg:flex-row items-center justify-evenly w-full min-h-screen ">
+          <SkillBubbleScene />
+        </div>
+      </section>
+    </>
   )
 }
 

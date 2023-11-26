@@ -27,14 +27,15 @@ export function fibonacciSphere(samples: number = 1000, radius: number = 1): [x:
 export type Job = {
     name: string,
     skills: string[],
+    description: string[],
     scene: FC
 }
 
 export const jobs: Job[] = [
-  {name: "Quomeda", skills: ["React.js", "Tailwind CSS", "Next.js", "JavaScript", "Git Version Control", "Amazon Web Services"], scene: Quomeda},
-  {name: "CumulArt", skills: ["Android", "Java", "FastAPI", "Flask", "Firebase", "Git Version Control", "Amazon Web Services"], scene: Cumulart},
-  {name: "Iberis", skills: ["Android", "Java", "FastAPI", "Flask", "Firebase", "Git Version Control", "Amazon Web Services"], scene: Iberis },
-  {name: "Web Application Firewall", skills: ["PfSense", "Snort", "VirtualBox"], scene: FireWall},
+  {name: "Quomeda", skills: ["React.js", "Tailwind CSS", "Next.js", "JavaScript", "Git Version Control", "Amazon Web Services"],description: ["Contributing to Development of the Frontend React Web Application by adding Graph Visualizations using D3.js","Integrating the functionalities to the Backend API Using Sequelize ORM"], scene: Quomeda},
+  {name: "CumulArt", skills: ["Android", "Java", "FastAPI", "Flask", "Firebase", "Git Version Control", "Amazon Web Services"],description: ["Designed a Mobile Android and iOS App for Artwork Estimation and automated CI/CD for automatic testing and publish.","Integrated User Authentication using AWS Amplify and Firebase, as well as the the database design for the App."], scene: Cumulart},
+  {name: "Iberis", skills: ["Android", "Java", "FastAPI", "Flask", "Firebase", "Git Version Control", "Amazon Web Services"],description: ["Built a script to automate extraction of tabular data of bank statements","Use Docker to create the environment necessary for the script to function"], scene: Iberis },
+  {name: "Web Application Firewall", skills: ["PfSense", "Snort", "VirtualBox"],description: ["Assembled a network to simulate CyberAttacks onto a production server with & without a Web Application Firewall.","Tested the firewall and learning how to configure it properly."], scene: FireWall},
 ]
 
 export const skills: Skill[] = [
@@ -48,11 +49,11 @@ export const skills: Skill[] = [
   { name: 'FastAPI', projects: ["Web Services TBS Course", "CumulArt Mobile App"], icon: 'icons/fastapi.svg' },
   { name: 'Firebase', projects: ["CumulArt Mobile App"], icon: 'icons/firebase.svg' },
   { name: 'Flask', projects: ["Web Services TBS Course", "CumulArt Mobile App"], icon: 'icons/flask.svg' },
-  { name: 'Git Version Control', projects: ["Quomeda Dashboard","CumulArt Mobile App" ,"Portfolio Website", "Web Services TBS Course"], icon: 'icons/git.svg' },
+  { name: 'Git', projects: ["Quomeda Dashboard","CumulArt Mobile App" ,"Portfolio Website", "Web Services TBS Course"], icon: 'icons/git.svg' },
   { name: 'HTML', projects: ["Quomeda Dashboard","CumulArt Mobile App" ,"Portfolio Website"],  icon: 'icons/html.svg' },
   { name: 'Java',projects: ["Java Programming TBS Course", "Advanced Programming TBS Course", "Portfolio Website"],  icon: 'icons/java.svg' },
   { name: 'JavaScript', projects: ["Web Services TBS Course", "Quomeda Dashboard", "CumulArt Mobile App","Portfolio Website"], icon: 'icons/javascript.svg' },
-  { name: 'Next.js',projects:["Web Development TBS Course"], icon: 'icons/next-js.svg' },
+  { name: 'Next.js',projects:["Portfolio Website"], icon: 'icons/next-js.svg' },
   { name: 'PHP', projects:["Web Development TBS Course"], icon: 'icons/php.svg' },
   { name: 'Python', projects: ["Python Programming TBS Course","Web Services TBS Course" ,"Business Intelligence & DBMS TBS Course"], icon: 'icons/python.svg' },
   { name: 'React.js', projects: ["Quomeda Dashboard","CumulArt Mobile App" ,"Portfolio Website"], icon: 'icons/react.svg' },
