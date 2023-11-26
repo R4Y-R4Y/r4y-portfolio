@@ -1,13 +1,16 @@
 "use-client"
 import { Camera, Canvas } from "@react-three/fiber";
-import { Suspense, useState} from "react";
+import { Suspense, useRef, useState} from "react";
 import Character from "../character";
 import { AnimationProvider } from "@/context/AnimationContext";
 import { Loader } from "@react-three/drei";
+import { useInView } from "framer-motion";
 
 export default function HomeScene() {
   // [-1.19,2.08,3.28]
   // [-.27,-.285,-.08]
+  const ref = useRef<HTMLDivElement>(null!)
+  const inView = useInView(ref)
   return (
     <>
       <Canvas camera={{position: [-1,1.88,3.28], rotation: [-.27,-.285,-.08]}} >

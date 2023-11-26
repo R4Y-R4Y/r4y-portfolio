@@ -109,8 +109,10 @@ const socialContacts = [
 
 
 function ContactSection() {
+  const ref = useRef<HTMLDivElement>(null!)
+  const inView = useInView(ref)
   return (
-    <section id="contact" className="flex-col sm:mt-0 mt-20 p-4">
+    <section ref={ref} id="contact" className="flex-col sm:mt-0 mt-20 p-4">
       <h2 className="text-accent-500 font-bold mb-4">Social Contacts</h2>
       <p className="mb-8">You can find me on these platforms:</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -123,11 +125,11 @@ function ContactSection() {
             transition={{ delay: index * 0.1 }}
           >
             <a href={contact.url} className="flex flex-col items-center justify-center h-full text-white">
-              <Canvas>
+              {inView ? <Canvas>
                 <Suspense fallback={null}>
                   <FloatingIcon path={contact.path} />
                 </Suspense>
-              </Canvas>
+              </Canvas>: null}
               <span className="ml-2">{contact.name}</span>
             </a>
           </motion.div>

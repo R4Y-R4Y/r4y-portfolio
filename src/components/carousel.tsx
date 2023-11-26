@@ -1,16 +1,19 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { motion } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import ReactCardFlip from "react-card-flip";
 // Import Swiper styles
 import 'swiper/css';
 import { jobs, skills } from '@/ts/skills';
-import { Suspense, useState } from 'react';
+import { Suspense, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 
 const Carousel = () => {
   const [current, setCurrent] = useState(1)
-  const [hover, setHover] = useState(false)
+  // create array of refs for each slide
+  const refs = Array(jobs.length).fill(0).map((_, i) => useRef(null))
+  // inView hook for each slide
+  const inViews = refs.map((ref) => useInView(ref))
   return (
     <Swiper
       className='w-screen'
@@ -33,6 +36,7 @@ const Carousel = () => {
         jobs.map((job,i) => 
         <SwiperSlide key={i}>
           <motion.div
+            ref={refs[i]}
             className='h-96 flex justify-center'
           >
             <motion.div
@@ -40,11 +44,11 @@ const Carousel = () => {
               >
               <h3>{job.name}</h3>
               <div className='w-80 h-36'>
-                <Canvas>
+                {inViews[i] ? <Canvas>
                   <Suspense fallback={null}>
                     <job.scene/>
                   </Suspense>
-                </Canvas>
+                </Canvas>: null}
               </div>
               <p className='mt-3'></p>
             </motion.div>
