@@ -32,9 +32,6 @@ export function Quomeda(props: JSX.IntrinsicElements['group']) {
       <ambientLight intensity={1} />
       <directionalLight position={[0, 10, 0]} intensity={.5} />
       <PerspectiveCamera makeDefault={true} far={1000} near={0.1} fov={22.895} position={[15.236, 7.892, -7.724]} rotation={[-2.612, 1.2, 2.642]} />
-      <mesh geometry={nodes.Plane002.geometry}>
-        <meshBasicMaterial color={"#fff"} />
-      </mesh>
       <mesh geometry={nodes.Pie.geometry} material={materials['Material.001']} position={[-11.635, 0.219, -3.633]} rotation={[0, -1.004, 0]} />
       <Float>
         <mesh geometry={nodes.Bars.geometry} material={materials['Material.004']} position={[-7.24, 1.445, 7.557]} rotation={[0.14, -0.157, 0.42]} scale={0.771} />

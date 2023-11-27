@@ -69,8 +69,10 @@ export function FireWall(props: JSX.IntrinsicElements['group']) {
         </group>
         <PerspectiveCamera name="Camera" makeDefault={true} far={1000} near={0.1} fov={22.895} position={[36.269, 14.448, -13.016]} rotation={[-2.429, 1.145, 2.475]} />
         <mesh name="Cube" geometry={nodes.Cube.geometry} material={nodes.Cube.material} />
-        <mesh name="Server" geometry={nodes.Server.geometry} material={materials.Server} position={[0.547, 0, 10.809]} />
-        <mesh name="Plane" geometry={nodes.Plane.geometry} material={materials.PlaneMaterial} position={[0, 0, 2.943]} scale={100} />
+        <mesh name="Server" geometry={nodes.Server.geometry} position={[0.547, 0, 10.809]} >
+          <meshStandardMaterial color="#737373" />
+        </mesh>
+        
       </group>
     </group>
   )

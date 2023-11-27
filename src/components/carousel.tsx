@@ -6,16 +6,18 @@ import 'swiper/css';
 import { Job, jobs} from '@/ts/skills';
 import { Suspense, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-
+import { IconContext } from "react-icons"
 import { Navigation, Pagination, Scrollbar } from 'swiper/modules';
-
+import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from "react-icons/io";
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { Swiper as SwiperType } from 'swiper/types';
 
 const Carousel = () => {
+  const swiperRef = useRef<SwiperType>();
   return (
     <>
       <Swiper
@@ -23,7 +25,11 @@ const Carousel = () => {
         className='w-screen mt-10'
         spaceBetween={50}
         slidesPerView={1}
-        navigation={{enabled: true}}
+        onBeforeInit={(swiper) => { swiperRef.current = swiper; }}
+        pagination={{
+          enabled: true,
+          clickable: true,
+        }}
         breakpoints={{
           768: {
             slidesPerView: 2,
@@ -40,12 +46,27 @@ const Carousel = () => {
           jobs.map((job,i) => 
           <SwiperSlide key={i}>
             <motion.div className='h-96 flex justify-center'>
-              
               <Slide job={job}/>
             </motion.div>
           </SwiperSlide>
           )
         }
+        <div onClick={() => swiperRef.current?.slideNext()} 
+          className="swiper-button-next after:[display:none]">
+          <IconContext.Provider value={{color: "#ec13e8", size:'70px'}}>
+            <div>
+              <IoIosArrowDroprightCircle />
+            </div>
+          </IconContext.Provider>
+        </div>
+        <div onClick={() => swiperRef.current?.slidePrev()} 
+          className="swiper-button-prev after:[display:none]">
+          <IconContext.Provider value={{color: "#ec13e8", size:'70px'}}>
+            <div>
+              <IoIosArrowDropleftCircle />
+            </div>
+          </IconContext.Provider>
+        </div>
       </Swiper>
     </>
   );

@@ -58,7 +58,7 @@ export function Cumulart(props: JSX.IntrinsicElements['group']) {
       <ambientLight intensity={1} />
       <directionalLight position={[0, 10, 0]} intensity={4} />
       <PerspectiveCamera makeDefault={true} far={1000} near={0.1} fov={22.895} position={[15.236, 7.892, -7.724]} rotation={[-2.612, 1.2, 2.642]} />
-      <mesh geometry={nodes.Plane001.geometry} material={nodes.Plane001.material} position={[0, -0.346, 0]} />
+      
       <Float>
       <mesh geometry={nodes.Column_Round1.geometry} material={materials.Marble} position={[-5.108, 0, 2.878]} rotation={[0, 1.055, 0]} />
       </Float>
@@ -70,7 +70,7 @@ export function Cumulart(props: JSX.IntrinsicElements['group']) {
       </Float>
       <mesh geometry={nodes.Column_Round2.geometry} material={materials.Marble} position={[-15.47, 3.264, 6.214]} rotation={[0.348, 0.017, -0.017]} />
       <Float>
-      <mesh geometry={nodes.Column_SquareSmall.geometry} material={materials.Marble} position={[-14.077, 3.831, 0.302]} rotation={[2.025, 1.238, -2.605]} />
+        <mesh geometry={nodes.Column_SquareSmall.geometry} material={materials.Marble} position={[-14.077, 3.831, 0.302]} rotation={[2.025, 1.238, -2.605]} />
       </Float>
       <mesh geometry={nodes.Shelf_Large.geometry} material={materials.White} position={[-9.866, 0, -0.366]} rotation={[0, Math.PI / 2, 0]} />
       <Float>

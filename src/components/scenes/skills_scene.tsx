@@ -22,8 +22,11 @@ export default function SkillBubbleScene() {
         <Scene setSkill={setSkill} />
       </Canvas>
     </div>
-    <div className="min-h-0 min-w-0 h-[100vw] w-[100vw] md:h-screen lg:w-1/2 lg:pt-20 lg:pb-20 grid justify-items-center ">
-      <h2 className="text-primary-400 font-bold text-center">Skill: {skill?.name} </h2>
+    <div className="min-h-0 min-w-0 h-[100vw] w-[100vw] md:h-screen lg:w-1/2 lg:pt-20 lg:pb-20 grid justify-items-center ">    
+      <p className="text-center">
+        <h2 className="text-primary-400 font-bold text-center m-4">Skill: {skill?.name} </h2>
+        (click on a skill to check projects i worked on)
+      </p>
       <ul className="list-disc list-inside">
         {skill?.projects.map((project, i) => <h3 key={i}><li>{project}</li></h3>)}
       </ul>
