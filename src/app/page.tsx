@@ -6,8 +6,9 @@ import 'keen-slider/keen-slider.min.css'
 import { Variants, motion, useInView} from "framer-motion"
 import { Suspense, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Float, Loader } from "@react-three/drei";
+import { Float } from "@react-three/drei";
 import { SVG3DModel } from "@/components/models/loader";
+import { Loader } from "@/components/loader";
 
 export default function Home() {
   return (
@@ -133,7 +134,7 @@ function ContactSection() {
           >
             <a href={contact.url} className="flex flex-col items-center justify-center h-full text-white">
               {inView ? <Canvas>
-                <Suspense fallback={null}>
+                <Suspense fallback={<Loader/>}>
                   <FloatingIcon path={contact.path} />
                 </Suspense>
               </Canvas>: null}

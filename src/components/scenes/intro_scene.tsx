@@ -3,8 +3,8 @@ import { Camera, Canvas } from "@react-three/fiber";
 import { Suspense, useRef, useState} from "react";
 import Character from "../character";
 import { AnimationProvider } from "@/context/AnimationContext";
-import { Loader } from "@react-three/drei";
 import { useInView } from "framer-motion";
+import { Loader } from "../loader";
 
 export default function HomeScene() {
   // [-1.19,2.08,3.28]
@@ -14,7 +14,9 @@ export default function HomeScene() {
   return (
     <>
       <Canvas camera={{position: [-1,1.88,3.28], rotation: [-.27,-.285,-.08]}} >
-        <Scene/>
+        <Suspense fallback={<Loader/>}>
+          <Scene/>
+        </Suspense>
       </Canvas>
     </>
   )

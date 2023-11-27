@@ -15,6 +15,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { Swiper as SwiperType } from 'swiper/types';
+import { Html } from '@react-three/drei';
 
 const Carousel = () => {
   const swiperRef = useRef<SwiperType>();
@@ -44,27 +45,21 @@ const Carousel = () => {
       >
         {
           jobs.map((job,i) => 
-          <SwiperSlide key={i}>
-            <motion.div className='h-96 flex justify-center'>
-              <Slide job={job}/>
-            </motion.div>
+          <SwiperSlide  key={i}>
+            <Slide job={job}/>
           </SwiperSlide>
           )
         }
         <div onClick={() => swiperRef.current?.slideNext()} 
           className="swiper-button-next after:[display:none]">
-          <IconContext.Provider value={{color: "#ec13e8", size:'70px'}}>
-            <div>
-              <IoIosArrowDroprightCircle />
-            </div>
+          <IconContext.Provider value={{color: "#ec13e8", className:'w-16'}}>
+            <IoIosArrowDroprightCircle />
           </IconContext.Provider>
         </div>
         <div onClick={() => swiperRef.current?.slidePrev()} 
           className="swiper-button-prev after:[display:none]">
-          <IconContext.Provider value={{color: "#ec13e8", size:'70px'}}>
-            <div>
-              <IoIosArrowDropleftCircle />
-            </div>
+          <IconContext.Provider value={{color: "#ec13e8", className:''}}>
+            <IoIosArrowDropleftCircle />
           </IconContext.Provider>
         </div>
       </Swiper>
@@ -80,15 +75,15 @@ function Slide({job}: {job: Job}){
   return(
     <motion.div onClick={() => setClicked(!clicked)} ref={ref} className='cursor-pointer border-b-4 border-secondary-600 rounded-md bg-gradient-to-t from-primary-700/20 text-center px-3 py-7 self-end items-center' >
       <h3>{job.name}</h3>
-      <div className='w-80 h-36 contents'>
+      <div className='w-full h-36 contents'>
         {inView ? <Canvas>
-          <Suspense fallback={null}>
+          <Suspense fallback={<Html>Loading...</Html>}>
             <job.scene/>
           </Suspense>
-        </Canvas>: null}
+        </Canvas>: <div className='h-36 flex justify-center items-center'>Loading...</div>}
       </div>
-      <ul className='mt-3 list-disc list-inside'>
-        {job.description.map((desc, i) => 
+      <ul className='mt-3 h-40 list-disc list-inside'>
+        {job.description.map((desc, i) =>
           <li key={i}>{desc}</li>
         )}
       </ul>      
