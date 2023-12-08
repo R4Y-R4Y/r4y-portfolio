@@ -23,7 +23,7 @@ const Carousel = () => {
     <>
       <Swiper
         modules={[Navigation, Pagination, Scrollbar]}
-        className='w-screen mt-10'
+        className='w-[95vw] mt-10'
         spaceBetween={50}
         slidesPerView={1}
         onBeforeInit={(swiper) => { swiperRef.current = swiper; }}
